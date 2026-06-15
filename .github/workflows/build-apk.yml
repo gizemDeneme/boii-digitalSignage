@@ -1,0 +1,38 @@
+name: Build Boii TV APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # Elle de tetiklenebilir
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Gradle izni
+        run: chmod +x android/gradlew
+
+      - name: Build Debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: APK'yı artifact olarak yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: boii-tv-apk
+          path: android/app/build/outputs/apk/debug/boii-tv-debug.apk
+          retention-days: 30
