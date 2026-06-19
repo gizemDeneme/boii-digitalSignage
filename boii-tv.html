@@ -48,8 +48,10 @@
   .home .home-main { position: relative; z-index: 1; }
 
   .topbar { display: flex; align-items: flex-start; justify-content: space-between; min-height: 84px; position: relative; z-index: 2; flex: 0 0 auto; }
-  .brand { display: flex; flex-direction: column; gap: 11px; }
-  .brand-logo { height: 52px; width: auto; display: block; margin-left: -2px; }
+  .brand { display: flex; flex-direction: column; gap: 8px; }
+  .layout-grid .brand-logo { display: none; }
+  .brand-logo { height: 68px; width: auto; display: block; }
+  .home-logo { height: 80px; width: auto; display: block; margin-bottom: 6px; opacity: .92; }
   .brand-sub { font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
   .topbar-right { display: flex; align-items: center; gap: 34px; }
   .weather { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); }
@@ -592,7 +594,7 @@
     const B = window.BOII, U = B.ui[lang];
     return (
       <div className={`welcome ${big ? "welcome-big" : ""}`}>
-        <div className="welcome-eyebrow">{U.welcome}</div>
+        <img className="home-logo" src={window.__BOII_WORDMARK} alt="Boii" />
         <h1 className="welcome-name">
           {lang === "tr" ? "Hoş geldiniz." : "Welcome."}
         </h1>
