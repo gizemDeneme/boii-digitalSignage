@@ -145,8 +145,7 @@
   .info-item.is-focused { border-color: var(--accent); background: #fffaf0; box-shadow: 0 12px 32px -16px rgba(74,46,24,.4); transform: translateX(5px); }
   .info-ic { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 13px; background: var(--surface2); color: var(--accent); flex-shrink: 0; border: 1px solid var(--line-soft); }
   .info-item.is-focused .info-ic { background: var(--accent); color: #fff7ee; }
-  .info-t { font-size: 15px; color: var(--ink-soft); }
-  .info-v { font-family: var(--font-display); font-size: 21px; font-weight: 600; color: var(--ink); margin: 2px 0 0; }
+  .info-t { font-size: 20px; font-weight: 600; color: var(--ink); }
   .info-detail { display: flex; flex-direction: column; justify-content: center; padding: 44px 50px; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: var(--radius); }
   .info-detail-icon { color: var(--accent); margin-bottom: 22px; }
   .info-detail-title { font-size: 17px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; }
@@ -237,8 +236,8 @@
       place: "Sığacık · Seferihisar · İzmir",
       wifi: { ssid: "boii rest n breakfast", pass: "boii2026" },
       tagline: {
-        tr: "Sığacık'ın kalbinde sakin bir mola",
-        en: "A calm retreat in the heart of Sığacık",
+        tr: "Sığacık'taki yeni eviniz",
+        en: "Your new home in Sığacık",
       },
     },
 
@@ -254,17 +253,19 @@
       tr: { title: "Otel Bilgileri", sub: "Konaklamanız için bilmeniz gerekenler" },
       en: { title: "Hotel Info", sub: "Everything you need for your stay" },
       rows: [
-        { icon: "coffee", tr: { t: "Kahvaltı", v: "09:00 – 12:00", n: "Siz sevgili misafirlerimizin dinlenmesi en büyük önceliğimiz; bu yüzden kahvaltı servisimiz öğlene kadar sürmektedir." }, en: { t: "Breakfast", v: "09:00 – 12:00", n: "Your rest is our greatest priority — so breakfast is served right through to noon." } },
-        { icon: "door",  tr: { t: "Check-out", v: "12:00'a kadar", n: "Geç çıkış için bize danışın" }, en: { t: "Check-out", v: "by 12:00", n: "Ask us about a late check-out" } },
-        { icon: "phone",  tr: { t: "İletişim", v: "0542 114 76 44", n: "05421147644 numaralı telefonumuzdan bize her zaman ulaşabilirsiniz." }, en: { t: "Contact", v: "0542 114 76 44", n: "Reach us anytime on 0542 114 76 44." } },
-        { icon: "moon",   tr: { t: "Sessizlik saatleri", v: "23:00 – 08:00", n: "Komşularımıza saygı için" }, en: { t: "Quiet hours", v: "23:00 – 08:00", n: "Out of respect for neighbours" } },
-        { icon: "towel",  tr: { t: "Plaj Havlusu", v: "Ücretsiz", n: "Misafirlerimize plaj havlusu ücretsiz sunulur; resepsiyondan temin edebilirsiniz." }, en: { t: "Beach Towel", v: "Complimentary", n: "Beach towels are free for our guests — just ask at reception." } },
+        { icon: "coffee",  tr: { t: "Kahvaltı", v: "09:00 – 12:00", n: "Dinlenmek en büyük önceliğiniz; bizim için de öyle. Kahvaltı servisimiz öğlene kadar sürmektedir." }, en: { t: "Breakfast", v: "09:00 – 12:00", n: "Rest is your priority — and ours. Breakfast is served right through to noon." } },
+        { icon: "door",    tr: { t: "Check-out", v: "12:00'a kadar", n: "Geç çıkış için bize danışın; elimizden geleni yaparız." }, en: { t: "Check-out", v: "by 12:00", n: "Ask us about a late check-out — we'll do our best." } },
+        { icon: "moon",    tr: { t: "Sessizlik saatleri", v: "23:00 – 09:00", n: "Sığacık Kaleiçi, yasal izinleriyle gece 01:00'a — nadiren 04:00'a — kadar müzik yapan mekânlara sahip canlı bir bölgedir. Ses hassasiyeti olan misafirlerimiz için odalardaki 'hoş geldiniz' setinde kulak tıkacı bulunur; karartma perdelerimiz de derin bir uykuya yardımcı olur.
+
+Ortak alanlarda ve kat giriş çıkışlarında diğer misafirlerimizin dinlenebilmesi için lütfen dikkatli olunuz." }, en: { t: "Quiet hours", v: "23:00 – 09:00", n: "Sığacık's Kaleiçi is a lively area where some venues hold music until 01:00 — and rarely 04:00 — under legal permits. The in-room welcome set includes earplugs; our blackout curtains also help you sleep deeply.
+
+When moving through common areas and floor entrances, please be mindful of other guests who may be resting." } },
+        { icon: "towel",   tr: { t: "Plaj Havlusu", v: "Ücretsiz", n: "Misafirlerimize plaj havlusu ücretsiz sunulur; bizden temin edebilirsiniz." }, en: { t: "Beach Towel", v: "Complimentary", n: "Beach towels are complimentary — just ask us." } },
         { icon: "smoking", tr: { t: "Sigara", v: "Balkon veya bahçede", n: "Balkonlu odalarda balkonda, balkonsuz odalarda yalnızca bahçede içilebilir. Odalarda sigara, yangın alarmlarını devreye sokar." }, en: { t: "Smoking", v: "Balcony or garden", n: "Balcony rooms: on the balcony; otherwise garden only. Smoking indoors sets off the fire alarms." } },
+        { icon: "droplet", tr: { t: "Sıcak Su", v: "Güneş enerjili", n: "Suyumuz güneş enerjisiyle ısıtılır — bu yüzden özellikle güneşli günlerin ardından beklenmedik ölçüde sıcak olabilir. Duşa girmeden önce biraz soğuk suyla dengelemenizi öneririz." }, en: { t: "Hot Water", v: "Solar-powered", n: "Our water is heated by the sun — so after sunny days it can be surprisingly hot. We suggest balancing with a little cold water before stepping in." } },
+        { icon: "phone",   tr: { t: "İletişim", v: "0542 114 76 44", n: "0542 114 76 44 numaralı telefonumuzdan bize her zaman ulaşabilirsiniz." }, en: { t: "Contact", v: "0542 114 76 44", n: "Reach us anytime on 0542 114 76 44." } },
       ],
-      comfortNote: {
-        tr: { t: "Huzurlu Uyku", d: "Sığacık Kaleiçi turistik bir bölge olduğundan, yasal izinleriyle gece 01:00'a — nadiren 04:00'a — kadar müzik yapan mekânlar bulunur. Ses hassasiyeti olan misafirlerimiz için odalardaki 'hoş geldiniz' setinde kulak tıkacı yer alır; karartma perdelerimiz ise ses emici özelliğiyle derin ve dinlendirici bir uykuya yardımcı olur." },
-        en: { t: "Restful Sleep", d: "As Sığacık's Kaleiçi is a lively tourist area, some venues play music until 01:00 — and rarely 04:00 — under legal permits. For noise-sensitive guests, the in-room welcome set includes earplugs, while our blackout curtains absorb sound to help you sleep deeply and rest well." },
-      },
+
     },
 
     guide: {
@@ -501,6 +502,7 @@
       globe: <g {...p}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></g>,
       wifi: <g {...p}><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0" /><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none" /></g>,
       sun: <g {...p}><circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M18.5 5.5l-1.4 1.4M6.9 17.1l-1.4 1.4" /></g>,
+      droplet: <g {...p}><path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0C19 10 12 2 12 2Z" /></g>,
     };
     return (
       <svg viewBox="0 0 24 24" style={s} className="icon" aria-hidden="true">
@@ -650,7 +652,6 @@
                 <span className="info-ic"><Icon name={r.icon} size={1.2} /></span>
                 <div className="info-text">
                   <div className="info-t">{r[lang].t}</div>
-                  <div className="info-v">{r[lang].v}</div>
                 </div>
               </Focusable>
             ))}
@@ -669,15 +670,7 @@
             <div className="wifi-note">{lang === "tr" ? "Tüm odalarda ve ortak alanlarda ücretsiz" : "Free in all rooms & common areas"}</div>
           </aside>
         </main>
-        {D.comfortNote && (
-          <div className="place-note info-comfort">
-            <span className="place-note-ic"><Icon name="bed" size={1.5} /></span>
-            <div className="place-note-text">
-              <div className="place-note-t">{D.comfortNote[lang].t}</div>
-              <div className="place-note-d">{D.comfortNote[lang].d}</div>
-            </div>
-          </div>
-        )}
+
       </SectionShell>
     );
   }
