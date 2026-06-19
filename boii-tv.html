@@ -244,11 +244,11 @@
     },
 
     tiles: [
-      { id: "hotel",   key: "01", icon: "hotel",   tr: { t: "Otel Bilgileri",  s: "Kahvaltı · WiFi · Check-out" }, en: { t: "Hotel Info",     s: "Breakfast · WiFi · Check-out" } },
-      { id: "guide",   key: "02", icon: "compass", tr: { t: "Sığacık Rehberi", s: "Gezilecek yerler" },           en: { t: "Sığacık Guide",  s: "Places to explore" } },
-      { id: "market",  key: "03", icon: "basket",  tr: { t: "Pazar & Etkinlik", s: "Cittaslow üretici pazarı" },  en: { t: "Market & Events",s: "Cittaslow farmers market" } },
-      { id: "beaches", key: "04", icon: "wave",    tr: { t: "Plajlar & Koylar", s: "Akkum · Teos · Akarca" },     en: { t: "Beaches & Coves",s: "Akkum · Teos · Akarca" } },
-      { id: "travel",  key: "05", icon: "route",   tr: { t: "Ulaşım & Mesafe", s: "Havalimanı · Çeşme · Efes" },  en: { t: "Getting Around", s: "Airport · Çeşme · Ephesus" } },
+      { id: "hotel",   key: "01", icon: "hotel",   tr: { t: "Otel Bilgileri",  s: "Kahvaltı · WiFi · Sessizlik saatleri" }, en: { t: "Hotel Info",     s: "Breakfast · WiFi · Quiet hours" } },
+      { id: "guide",   key: "02", icon: "compass", tr: { t: "Sığacık Rehberi", s: "Yürüme mesafesinde tarih ve deniz" },   en: { t: "Sığacık Guide",  s: "History and sea, all within walking distance" } },
+      { id: "market",  key: "03", icon: "basket",  tr: { t: "Pazar & Etkinlik", s: "Cittaslow · Pazar · Şenlikler" },      en: { t: "Market & Events",s: "Cittaslow · Market · Festivals" } },
+      { id: "beaches", key: "04", icon: "wave",    tr: { t: "Plajlar & Koylar", s: "Akkum · Akarca · Ürkmez" },            en: { t: "Beaches & Coves",s: "Akkum · Akarca · Ürkmez" } },
+      { id: "travel",  key: "05", icon: "route",   tr: { t: "Ulaşım & Mesafe", s: "Havalimanı · Çeşme · Efes" },           en: { t: "Getting Around", s: "Airport · Çeşme · Ephesus" } },
     ],
 
     hotelInfo: {
@@ -280,8 +280,8 @@
         en: { t: "About Sığacık", d: "Named after the ancient Ionian city of Teos, Sığacık is shaped by fortress walls built in the 16th century under Süleyman the Magnificent. Once a base for the Ottoman navy, the harbour is known today for its stone houses, narrow lanes and the serene spirit of Seferihisar — Turkey's first Cittaslow (Slow City) district." },
       },
       note: {
-        tr: { t: "Yeme & İçme", d: ["Siz değerli misafirlerimize, yalnızca mutfağını bildiğimiz ve gitmekten keyif aldığımız yerleri önermeyi tercih ediyoruz.", "Damak tadınıza ve eğlence anlayışınıza göre en güzel alternatifler için her zaman bize danışabilirsiniz."] },
-        en: { t: "Where to Eat & Drink", d: ["We prefer to recommend only the places whose kitchens we know and truly enjoy.", "For the best options to suit your taste and sense of fun, you're always welcome to ask us."] },
+        tr: { t: "Yeme & İçme", d: ["Siz değerli misafirlerimize, yalnızca mutfağını bildiğimiz ve gitmekten keyif aldığımız yerleri önermeyi tercih ediyoruz.", "Damak tadınıza ve tercihlerinize göre en güzel alternatifleri seçmenize yardımcı olmaktan memnuniyet duyarız."] },
+        en: { t: "Where to Eat & Drink", d: ["We only recommend places whose kitchens we know and genuinely enjoy.", "We're happy to point you to the right spot depending on what you're in the mood for — just ask."] },
       },
     },
 
@@ -300,17 +300,21 @@
       tr: { title: "Plajlar & Koylar", sub: "Sakin koylardan rüzgârlı kumsallara" },
       en: { title: "Beaches & Coves", sub: "From calm coves to breezy shores" },
       items: [
-        { slotId: "sec-beach-0", tr: { t: "Büyük Akkum", s: "Sörf & rüzgâr · Mavi Bayrak", d: "Geniş kumsal, sığ ve berrak su; rüzgâr sörfü için ideal.", meta: "2 km · 5 dk" }, en: { t: "Büyük Akkum", s: "Surf & wind · Blue Flag", d: "Wide sand, shallow clear water — ideal for windsurfing.", meta: "2 km · 5 min" } },
-        { slotId: "sec-beach-1", tr: { t: "Ekmeksiz Plajı", s: "Gün batımı · halk plajı", d: "Uzun kumsalı ve gün batımıyla bilinen, rahat bir halk plajı.", meta: "3 km · 7 dk" }, en: { t: "Ekmeksiz Beach", s: "Sunset · public beach", d: "A relaxed public beach known for its long sand and sunsets.", meta: "3 km · 7 min" } },
-        { slotId: "sec-beach-2", tr: { t: "Akarca", s: "Berrak su · aile dostu", d: "Aileler için sığ, berrak ve korunaklı bir koy.", meta: "6 km · 12 dk" }, en: { t: "Akarca", s: "Clear water · family", d: "A sheltered, shallow cove that's great for families.", meta: "6 km · 12 min" } },
-        { slotId: "sec-beach-3", tr: { t: "Güneşköy", s: "Sakin kıyı · plaj kulüpleri", d: "Daha sakin bir sahil; plaj kulüpleri ve dingin koyları.", meta: "12 km · 18 dk" }, en: { t: "Güneşköy", s: "Calm coast · beach clubs", d: "A quieter shoreline with beach clubs and tranquil bays.", meta: "12 km · 18 min" } },
-        { slotId: "sec-beach-4", tr: { t: "Ürkmez Plajı", s: "Uzun kumsal · Mavi Bayrak", d: "Sığ suyu ve uzun kumsalıyla aileler için ideal tatil kıyısı.", meta: "16 km · 22 dk" }, en: { t: "Ürkmez Plajı", s: "Long sand · Blue Flag", d: "Shallow water and a long beach — an ideal family seaside.", meta: "16 km · 22 min" } },
+        { slotId: "sec-beach-0", tr: { t: "Büyük Akkum", s: "Sörf & rüzgâr · Mavi Bayrak", d: "Sığacık'ın en bilinen plajı. Rüzgârlı günlerde sörfçülerin, sakin günlerde yüzücülerin gözdesi; geniş kumu ve berrak sığ suyla her ikisi için de biçilmiş kaftan.", meta: "2 km · 5 dk" }, en: { t: "Büyük Akkum", s: "Surf & wind · Blue Flag", d: "The best-known beach near Sığacık. Windsurfers love it on breezy days; swimmers love it when it's calm — wide sand and clear shallow water suit both perfectly.", meta: "2 km · 5 min" } },
+        { slotId: "sec-beach-1", tr: { t: "Ekmeksiz Plajı", s: "Gün batımı · halk plajı", d: "Uzun kumsalda yürüyüş, güneş ve akşamın renkleriyle boyanan ufuk. Sığacık çevresinde gün batımı izlemek için en güzel yerlerden biri.", meta: "3 km · 7 dk" }, en: { t: "Ekmeksiz Beach", s: "Sunset · public beach", d: "A long beach for strolling, sun and sunsets that turn the horizon every shade of amber. One of the best spots near Sığacık to watch the evening come in.", meta: "3 km · 7 min" } },
+        { slotId: "sec-beach-2", tr: { t: "Akarca", s: "Berrak su · aile dostu", d: "Rüzgârdan korunaklı, sığ ve berrak bir koy. Çocuklar için güvenli, büyükler için dingin; sabahın erken saatlerinde neredeyse kendi başınıza.", meta: "6 km · 12 dk" }, en: { t: "Akarca", s: "Clear water · family", d: "A sheltered cove with shallow, clear water. Safe for children, peaceful for adults — and early in the morning, almost entirely yours.", meta: "6 km · 12 min" } },
+        { slotId: "sec-beach-3", tr: { t: "Güneşköy", s: "Sakin kıyı · plaj kulüpleri", d: "Kalabalığın uzağında, şezlongunuzda kitabınızla ya da plaj kulübünde güzel bir yemekle tam bir yavaş gün.", meta: "12 km · 18 dk" }, en: { t: "Güneşköy", s: "Calm coast · beach clubs", d: "Far enough from the crowd for a truly slow day — a book on your sunlounger or a proper meal at one of the beach clubs.", meta: "12 km · 18 min" } },
+        { slotId: "sec-beach-4", tr: { t: "Ürkmez Plajı", s: "Uzun kumsal · Mavi Bayrak", d: "Geniş kumlu sahil, sığ su ve Mavi Bayrak. Kitabı bir kenara bırakıp suya dalmak isteyenler için tam burası.", meta: "16 km · 22 dk" }, en: { t: "Ürkmez Plajı", s: "Long sand · Blue Flag", d: "Wide sand, shallow water and a Blue Flag. If you're going to put down the book and actually get in the sea, this is the place.", meta: "16 km · 22 min" } },
       ],
+      note: {
+        tr: { t: "Plaja Gitmeden Önce", d: "Boii plaj havlunuzu almayı unutmayın; gün sonunda geri bırakmanız yeterli. Hangi plaja nasıl gidileceğini, park sorununun olup olmadığını ve sakin saatlerini sormaktan çekinmeyin — en kısa ve keyifli yolu gösteririz." },
+        en: { t: "Before You Go", d: "Don't forget your complimentary Boii beach towel — just drop it back in the evening. Ask us which beach suits you today, how to get there and when it's quietest. We know all the shortcuts." },
+      },
     },
 
     travel: {
-      tr: { title: "Ulaşım & Mesafe", sub: "Boii'den çevreye yaklaşık mesafeler" },
-      en: { title: "Getting Around", sub: "Approximate distances from Boii" },
+      tr: { title: "Ulaşım & Mesafe", sub: "Sığacık'tan her yöne, düşündüğünüzden yakın" },
+      en: { title: "Getting Around", sub: "Closer than you think from Sığacık" },
       items: [
         { tr: { t: "Sığacık Marina", s: "Yürüyerek" }, en: { t: "Sığacık Marina", s: "On foot" }, km: "300 m", time: "3 dk", timeEn: "3 min" },
         { tr: { t: "Seferihisar Merkez", s: "Araçla" }, en: { t: "Seferihisar Town", s: "By car" }, km: "5 km", time: "12 dk", timeEn: "12 min" },
@@ -319,6 +323,10 @@
         { tr: { t: "İzmir Şehir Merkezi", s: "Konak" }, en: { t: "İzmir City Centre", s: "Konak" }, km: "52 km", time: "60 dk", timeEn: "60 min" },
         { tr: { t: "Efes & Selçuk", s: "Antik kent" }, en: { t: "Ephesus & Selçuk", s: "Ancient city" }, km: "70 km", time: "75 dk", timeEn: "75 min" },
       ],
+      note: {
+        tr: { t: "Nasıl Gidilir?", d: "Sığacık–Seferihisar dolmuşları her saat başı çalışır. Taksi için bize sorun; güvenilir sürücüler önerebiliriz. Araç kiralamak isteyenler için de seçeneklerimiz var. Çeşme, Efes veya havalimanı için önceden transfer ayarlayabiliriz." },
+        en: { t: "How to Get There", d: "Dolmuş minibuses run hourly between Sığacık and Seferihisar. Ask us for taxi recommendations — we know reliable drivers. We can also suggest car rental, or arrange a transfer to Çeşme, Ephesus or the airport." },
+      },
     },
 
     ui: {
@@ -737,6 +745,15 @@
             ))}
           </div>
         </main>
+        {D.note && (
+          <div className="place-note">
+            <span className="place-note-ic"><Icon name="route" size={1.5} /></span>
+            <div className="place-note-text">
+              <div className="place-note-t">{D.note[lang].t}</div>
+              <div className="place-note-d">{D.note[lang].d}</div>
+            </div>
+          </div>
+        )}
       </SectionShell>
     );
   }
