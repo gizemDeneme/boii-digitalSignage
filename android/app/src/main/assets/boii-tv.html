@@ -137,18 +137,21 @@
   .section-title { font-family: var(--font-display); font-size: 58px; font-weight: 600; line-height: 1; margin-top: 10px; letter-spacing: -.5px; }
   .section-sub { font-size: 22px; color: var(--ink-soft); margin-top: 12px; }
 
-  .info-layout { display: grid; grid-template-columns: 1fr 420px; gap: 28px; flex: 1 1 auto; min-height: 0; padding-bottom: 0; }
+  .info-layout { display: grid; grid-template-columns: 310px 1fr 370px; gap: 22px; flex: 1 1 auto; min-height: 0; padding-bottom: 0; }
   .screen.sec-info { padding-bottom: 92px; }
   .info-comfort { flex: 0 0 auto; }
-  .info-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 20px; }
-  .info-card { display: flex; gap: 20px; align-items: center; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: 18px; padding: 26px 28px; }
-  .info-card.is-focused { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 20px 40px -22px rgba(74,46,24,.5); background: #fffaf0; }
-  .info-card.wide { grid-column: 1 / -1; }
-  .info-ic { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 15px; background: var(--surface2); color: var(--accent); flex-shrink: 0; border: 1px solid var(--line-soft); }
-  .info-card.is-focused .info-ic { background: var(--accent); color: #fff7ee; }
-  .info-t { font-size: 18px; color: var(--ink-soft); white-space: nowrap; }
-  .info-v { font-family: var(--font-display); font-size: 30px; font-weight: 600; color: var(--ink); margin: 3px 0 4px; white-space: nowrap; }
-  .info-n { font-size: 16px; color: var(--ink-faint); }
+  .info-list { display: flex; flex-direction: column; gap: 10px; }
+  .info-item { display: flex; align-items: center; gap: 16px; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: 16px; padding: 16px 20px; }
+  .info-item.is-focused { border-color: var(--accent); background: #fffaf0; box-shadow: 0 12px 32px -16px rgba(74,46,24,.4); transform: translateX(5px); }
+  .info-ic { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 13px; background: var(--surface2); color: var(--accent); flex-shrink: 0; border: 1px solid var(--line-soft); }
+  .info-item.is-focused .info-ic { background: var(--accent); color: #fff7ee; }
+  .info-t { font-size: 15px; color: var(--ink-soft); }
+  .info-v { font-family: var(--font-display); font-size: 21px; font-weight: 600; color: var(--ink); margin: 2px 0 0; }
+  .info-detail { display: flex; flex-direction: column; justify-content: center; padding: 44px 50px; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: var(--radius); }
+  .info-detail-icon { color: var(--accent); margin-bottom: 22px; }
+  .info-detail-title { font-size: 17px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; }
+  .info-detail-value { font-family: var(--font-display); font-size: 50px; font-weight: 600; color: var(--ink); line-height: 1.05; margin: 12px 0 26px; }
+  .info-detail-note { font-size: 23px; line-height: 1.65; color: var(--ink-soft); text-wrap: pretty; }
   .wifi-card { background: linear-gradient(160deg, var(--accent), #8c4a2e); color: #fff7ee; border-radius: var(--radius); padding: 38px 40px; display: flex; flex-direction: column; }
   .wifi-card .icon { color: #fff7ee; }
   .wifi-label { font-family: var(--font-display); font-size: 30px; font-weight: 600; margin: 14px 0 22px; }
@@ -584,12 +587,11 @@
 
   function WelcomeBlock({ lang, big }) {
     const B = window.BOII, U = B.ui[lang];
-    const first = B.guest.name.split(" ")[0];
     return (
       <div className={`welcome ${big ? "welcome-big" : ""}`}>
-        <div className="welcome-eyebrow">{U.welcome} · {U.room} {B.guest.room}</div>
+        <div className="welcome-eyebrow">{U.welcome}</div>
         <h1 className="welcome-name">
-          {lang === "tr" ? <>İyi ki buradasınız,<br /><em>{first}</em>.</> : <>So glad you're here,<br /><em>{first}</em>.</>}
+          {lang === "tr" ? "Hoş geldiniz." : "Welcome."}
         </h1>
         <p className="welcome-tag">{B.hotel.tagline[lang]}</p>
       </div>
@@ -631,21 +633,29 @@
 
   function HotelInfo({ lang, onHome }) {
     const D = window.BOII.hotelInfo, B = window.BOII, U = B.ui[lang];
+    const { focusId } = useFocus();
     useAutoFocus("hotelinfo");
+    const activeIdx = Math.max(0, D.rows.findIndex((_, i) => focusId === `info-${i}`));
+    const active = D.rows[activeIdx];
     return (
       <SectionShell lang={lang} title={D[lang].title} sub={D[lang].sub} onHome={onHome} className="sec-info">
         <main className="info-layout">
-          <div className="info-grid">
+          <div className="info-list">
             {D.rows.map((r, i) => (
-              <Focusable key={i} id={`info-${i}`} className={`info-card ${r.wide ? "wide" : ""}`} autoFocus={i === 0} onSelect={() => {}}>
-                <span className="info-ic"><Icon name={r.icon} size={1.5} /></span>
+              <Focusable key={i} id={`info-${i}`} className="info-item" autoFocus={i === 0} onSelect={() => {}}>
+                <span className="info-ic"><Icon name={r.icon} size={1.2} /></span>
                 <div className="info-text">
                   <div className="info-t">{r[lang].t}</div>
                   <div className="info-v">{r[lang].v}</div>
-                  <div className="info-n">{r[lang].n}</div>
                 </div>
               </Focusable>
             ))}
+          </div>
+          <div className="info-detail">
+            <div className="info-detail-icon"><Icon name={active.icon} size={2.2} /></div>
+            <div className="info-detail-title">{active[lang].t}</div>
+            <div className="info-detail-value">{active[lang].v}</div>
+            <div className="info-detail-note">{active[lang].n}</div>
           </div>
           <aside className="wifi-card">
             <Icon name="wifi" size={2.2} />
