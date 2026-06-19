@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import java.io.File;
 
 public class MainActivity extends Activity {
 
@@ -55,7 +56,13 @@ public class MainActivity extends Activity {
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
 
-        webView.loadUrl("file:///android_asset/boii-tv.html");
+        // ADB push ile güncelleme: adb push boii-tv.html /sdcard/Android/data/com.boii.tv/files/boii-tv.html
+        File externalHtml = new File(getExternalFilesDir(null), "boii-tv.html");
+        if (externalHtml.exists()) {
+            webView.loadUrl("file://" + externalHtml.getAbsolutePath());
+        } else {
+            webView.loadUrl("file:///android_asset/boii-tv.html");
+        }
     }
 
     @Override
