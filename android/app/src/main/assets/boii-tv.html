@@ -50,8 +50,8 @@
   .topbar { display: flex; align-items: flex-start; justify-content: space-between; min-height: 84px; position: relative; z-index: 2; flex: 0 0 auto; }
   .brand { display: flex; flex-direction: column; gap: 8px; }
   .layout-grid .brand-logo { display: none; }
-  .brand-logo { height: 68px; width: auto; display: block; }
-  .home-logo { height: 80px; width: auto; display: block; margin-bottom: 6px; opacity: .92; }
+  .brand-logo { height: 72px; width: auto; display: block; }
+  .home-logo { height: 100px; width: auto; display: block; margin-bottom: 18px; }
   .brand-sub { font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
   .topbar-right { display: flex; align-items: center; gap: 34px; }
   .weather { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); }
@@ -537,7 +537,6 @@
       <header className="topbar">
         <div className="brand">
           <img className="brand-logo" src={window.__BOII_WORDMARK} alt="Boii rest &amp; breakfast" />
-          <div className="brand-sub">{B.hotel.place}</div>
         </div>
         <div className="topbar-right">
           <div className="weather">
@@ -591,14 +590,13 @@
   }
 
   function WelcomeBlock({ lang, big }) {
-    const B = window.BOII, U = B.ui[lang];
+    const B = window.BOII;
     return (
       <div className={`welcome ${big ? "welcome-big" : ""}`}>
         <img className="home-logo" src={window.__BOII_WORDMARK} alt="Boii" />
         <h1 className="welcome-name">
-          {lang === "tr" ? "Hoş geldiniz." : "Welcome."}
+          {lang === "tr" ? "Sığacık'taki yeni evinize hoş geldiniz." : "Welcome to your new home in Sığacık."}
         </h1>
-        <p className="welcome-tag">{B.hotel.tagline[lang]}</p>
       </div>
     );
   }
