@@ -207,6 +207,24 @@
   .hint-home { margin-left: auto; color: var(--ink-soft); font-weight: 600; background: var(--surface); border: 1.5px solid var(--line); border-radius: 999px; padding: 9px 20px; }
   .hint-home .icon { color: var(--accent); }
 
+  /* ── Master-detail layout (guide / market / beach / travel) ── */
+  .md-layout { display: grid; grid-template-columns: 310px 1fr; gap: 22px; flex: 1 1 auto; min-height: 0; }
+  .md-detail { display: flex; flex-direction: column; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: var(--radius); overflow: hidden; }
+  .md-detail.has-photo { justify-content: flex-start; }
+  .md-detail.no-photo { justify-content: center; padding: 44px 50px; }
+  .md-photo { height: 340px; flex-shrink: 0; position: relative; overflow: hidden; }
+  .md-photo img, .md-photo .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .md-body { padding: 28px 40px; flex: 1; overflow: hidden; }
+  .md-detail-label { font-size: 15px; color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+  .md-detail-h { font-family: var(--font-display); font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
+  .md-detail-meta { font-size: 17px; color: var(--ink-faint); margin-bottom: 18px; display: flex; align-items: center; gap: 5px; }
+  .md-detail-meta .icon { color: var(--accent); }
+  .md-s { font-size: 15px; color: var(--ink-faint); margin-top: 3px; }
+  .travel-time-badge { display: flex; align-items: center; gap: 8px; font-size: 24px; color: var(--ink-soft); margin: 10px 0 26px; }
+  .travel-item { padding: 14px 18px !important; }
+  .travel-item .info-text { flex: 1; }
+  .screen.sec-guide, .screen.sec-market, .screen.sec-beach, .screen.sec-travel { padding-bottom: 92px; }
+
   .icon { display: inline-block; vertical-align: middle; }
 </style>
 </head>
@@ -271,28 +289,22 @@
       tr: { title: "Sığacık Rehberi", sub: "Adımlarınızca keşfedilmeyi bekleyen yerler" },
       en: { title: "Sığacık Guide", sub: "Places waiting to be discovered on foot" },
       items: [
-        { slotId: "sec-guide-0", tr: { t: "Sığacık Kalesi", s: "16. yy Osmanlı kalesi", d: "Surların içine kurulmuş taş evler, kafeler ve sanat atölyeleri.", meta: "3 dk · yürüyerek" }, en: { t: "Sığacık Castle", s: "16th-c. Ottoman fortress", d: "Stone houses, cafés and art studios nestled within the walls.", meta: "3 min · walk" } },
-        { slotId: "sec-guide-1", tr: { t: "Teos Antik Kenti", s: "Dionysos Tapınağı", d: "Şarap tanrısına adanmış İon kenti; zeytinlikler arasında.", meta: "5 km · 10 dk" }, en: { t: "Teos Ancient City", s: "Temple of Dionysos", d: "Ionian city dedicated to the god of wine, set among olive groves.", meta: "5 km · 10 min" } },
-        { slotId: "sec-guide-2", tr: { t: "Marina & Liman", s: "Tekne turları", d: "Gün batımı yürüyüşü, balıkçı tekneleri ve koy turları.", meta: "2 dk · yürüyerek" }, en: { t: "Marina & Harbour", s: "Boat tours", d: "Sunset strolls, fishing boats and daily cove cruises.", meta: "2 min · walk" } },
+        { slotId: "sec-guide-0", icon: "landmark", tr: { t: "Sığacık Kaleiçi", s: "Surlar içinde", v: "Tam ortasındasınız", n: "Kanuni döneminde inşa edilen kale surlarının içi; tezgahlar, kafeler ve restoranlarla dolu. Taş sokakları ve begonvilleri takip ederek deniz kenarına çıkın ve Sığacık havasını içinize çekin." }, en: { t: "Sığacık Old Town", s: "Within the walls", v: "You're right in it", n: "Inside the fortress walls built under Süleyman the Magnificent — stalls, cafés and restaurants fill the lanes. Follow the stone streets and bougainvilleas down to the waterfront and breathe in the Sığacık air." } },
+        { slotId: "sec-guide-1", icon: "landmark", tr: { t: "Teos Antik Kenti", s: "5 km · araçla", v: "5 km · 10 dk araçla", n: "Şarap tanrısı Dionysos'a adanmış İon kenti, zeytinlikler arasında saklı. Tapınak kalıntıları, tiyatro ve antik liman izleri var. Yazın gölge az — bol su, şapka ve erken saat şart." }, en: { t: "Teos Ancient City", s: "5 km · by car", v: "5 km · 10 min by car", n: "An Ionian city dedicated to Dionysos, god of wine, hidden among olive groves. Temple ruins, a theatre and traces of the ancient harbour. In summer: bring water, a hat, and go early — shade is scarce." } },
+        { slotId: "sec-guide-2", icon: "pin", tr: { t: "Marina & Liman", s: "2 dk · yürüyerek", v: "2 dk · yürüyerek", n: "Sabah balıkçı tekne dönüşü, öğlen koy turları, akşam gün batımı — marina günün her saatinde farklı. Koy turu için tekne turu önerilerinde bulunabiliriz." }, en: { t: "Marina & Harbour", s: "2 min · on foot", v: "2 min · on foot", n: "Morning fishing boat returns, afternoon cove tours, evening sunsets — the marina changes face all day. Ask us for boat trip recommendations." } },
+        { icon: "dining", tr: { t: "Yeme, İçme & Yerel", s: "Kaleiçi & çevre", v: "Bizden sorun", n: "Sizi yalnızca mutfağını bildiğimiz ve gitmekten keyif aldığımız yerlere yönlendiriyoruz. Damak tadınıza ve eğlence anlayışınıza göre en doğru öneri için bize sorun — kahvaltı mekanından akşam yemeğine, Sığacık reçelinden yerel zeytinyağına kadar yol gösteririz." }, en: { t: "Eat, Drink & Local", s: "Old town & beyond", v: "Just ask us", n: "We point you only to places whose kitchens we know and genuinely enjoy. Ask us for the right recommendation to match your taste — from breakfast spot to dinner table, local jam to olive oil." } },
       ],
-      intro: {
-        tr: { t: "Sığacık Hakkında", d: "Adını antik İon kenti Teos'tan alan Sığacık, 16. yüzyılda Kanuni Sultan Süleyman döneminde inşa edilen kale surlarıyla şekillenir. Bir zamanlar Osmanlı donanmasının üssü olan liman; bugün taş evleri, dar sokakları ve Türkiye'nin ilk Cittaslow (Sakin Şehir) ilçesi Seferihisar'ın dingin ruhuyla tanınır." },
-        en: { t: "About Sığacık", d: "Named after the ancient Ionian city of Teos, Sığacık is shaped by fortress walls built in the 16th century under Süleyman the Magnificent. Once a base for the Ottoman navy, the harbour is known today for its stone houses, narrow lanes and the serene spirit of Seferihisar — Turkey's first Cittaslow (Slow City) district." },
-      },
-      note: {
-        tr: { t: "Yeme & İçme", d: ["Siz değerli misafirlerimize, yalnızca mutfağını bildiğimiz ve gitmekten keyif aldığımız yerleri önermeyi tercih ediyoruz.", "Damak tadınıza ve tercihlerinize göre en güzel alternatifleri seçmenize yardımcı olmaktan memnuniyet duyarız."] },
-        en: { t: "Where to Eat & Drink", d: ["We only recommend places whose kitchens we know and genuinely enjoy.", "We're happy to point you to the right spot depending on what you're in the mood for — just ask."] },
-      },
     },
 
     market: {
       tr: { title: "Pazar & Etkinlik", sub: "Mevsimin ritmiyle hareket eden yerel hayat" },
       en: { title: "Market & Events", sub: "Local life moving to the rhythm of the season" },
       items: [
-        { slotId: "sec-market-0", tr: { t: "Sığacık Üretici Pazarı", s: "Her Pazar · 09:00 – 16:00", d: "Cittaslow sertifikalı, yöresel ve organik üreticiler. Zeytinyağı, otlar, ev reçelleri, taş fırın ekmeği.", meta: "Kale yanı meydan" }, en: { t: "Sığacık Producers' Market", s: "Every Sunday · 09:00 – 16:00", d: "Cittaslow-certified local & organic growers. Olive oil, herbs, jams and stone-oven bread.", meta: "Square by the castle" } },
-        { slotId: "sec-market-1", tr: { t: "Seferihisar Mandalina Şenliği", s: "Aralık başı · yıllık", d: "Seferihisar'ın simgesi mandalinaya adanan renkli şenlik: konserler, yarışmalar, mandalinalı lezzetler ve üretici stantları.", meta: "Seferihisar merkez" }, en: { t: "Seferihisar Mandarin Festival", s: "Early December · annual", d: "A colourful festival for the town's beloved mandarin: concerts, contests, mandarin treats and producer stalls.", meta: "Seferihisar town" } },
-        { slotId: "sec-market-2", tr: { t: "Lavanta Hasat Şenliği", s: "Temmuz · yıllık", d: "Turgut Köyü'ndeki mor tarlalarda lavanta hasadı; lavanta yağı ve sabun atölyeleri, müzik ve yöresel ürünler.", meta: "Turgut Köyü" }, en: { t: "Lavender Harvest Festival", s: "July · annual", d: "Lavender harvest in the purple fields of Turgut village; oil & soap workshops, music and local produce.", meta: "Turgut village" } },
-        { slotId: "sec-market-3", tr: { t: "Seferihisar Kurtuluş Şenlikleri", s: "8 – 11 Eylül", d: "İlçenin kurtuluşunu kutlayan şenlikler: kortej, halk oyunları, konserler ve sokak etkinlikleri.", meta: "Seferihisar merkez" }, en: { t: "Liberation Festivities", s: "8 – 11 September", d: "Festivities marking the town's liberation: a parade, folk dances, concerts and street events.", meta: "Seferihisar town" } },
+        { slotId: "sec-market-0", icon: "basket", tr: { t: "Sığacık Üretici Pazarı", s: "Her Pazar", v: "Her Pazar", n: "Sığacık Kalesi'nin hemen yanı başında kurulan bu Cittaslow pazarı, bölgenin en sevilen haftalık buluşma noktası. Zeytinyağı, yöresel otlar ve baharatlar, çiçek balı, ev yapımı reçeller, taş fırın ekmeği, mevsim sebze-meyveleri, el örgüsü ve yerel el sanatları; her tezgahta doğrudan üreticisiyle karşılaşıyorsunuz." }, en: { t: "Sığacık Producers' Market", s: "Every Sunday", v: "Every Sunday", n: "Set right beside Sığacık Castle, this Cittaslow market is the area's favourite weekly gathering. Olive oil, local herbs and spices, flower honey, homemade jams, stone-oven bread, seasonal fruit and veg, knitwear and local crafts — and at every stall, the producer themselves." } },
+        { slotId: "sec-teosfest", icon: "compass", tr: { t: "TeosFest", s: "Ağustos · yıllık", v: "Ağustos · Sığacık Marina", n: "Her yıl Ağustos ayında Sığacık ve Seferihisar'ın farklı köşelerini sahneye dönüştüren çok disiplinli bir festival. Konserler, tiyatro oyunları, sergiler, atölyeler, dans gösterileri ve kısa film programıyla on gün boyunca sanat her yerde. Teos Marina'da Perşembe akşamları ücretsiz konserler var — yazın geliyorsanız programa mutlaka bir göz atın." }, en: { t: "TeosFest", s: "August · annual", v: "August · Sığacık Marina", n: "Every August, TeosFest turns different corners of Sığacık and Seferihisar into stages. Ten days of concerts, theatre, exhibitions, workshops, dance and short films — art is everywhere. Free Thursday evening concerts at Teos Marina throughout summer. Check the programme before you arrive." } },
+        { slotId: "sec-market-2", icon: "leaf", tr: { t: "Lavanta Hasat Şenliği", s: "Temmuz · yıllık", v: "Temmuz · Turgut Köyü", n: "Turgut Köyü'ndeki mor tarlalarda lavanta hasadı; yağ ve sabun atölyeleri, müzik ve yöresel ürünler." }, en: { t: "Lavender Harvest Festival", s: "July · annual", v: "July · Turgut village", n: "Lavender harvest in the purple fields of Turgut village; oil and soap workshops, music and local produce." } },
+        { slotId: "sec-market-3", icon: "pin", tr: { t: "Seferihisar Kurtuluş Şenlikleri", s: "8–11 Eylül", v: "8–11 Eylül", n: "İlçenin kurtuluşunu kutlayan şenlikler: kortej, halk oyunları, konserler ve sokak etkinlikleri." }, en: { t: "Liberation Festivities", s: "8–11 September", v: "8–11 September", n: "Festivities marking the town's liberation: a parade, folk dances, concerts and street events." } },
+        { slotId: "sec-market-1", icon: "leaf", tr: { t: "Seferihisar Mandalina Şenliği", s: "Kasım ayı · yıllık", v: "Kasım ayı", n: "Seferihisar'ın simgesi mandalinaya adanan bu şenlik her yıl Kasım ayı civarında gerçekleşiyor. Konserler, mandalina yarışmaları, üretici stantları ve yöresel lezzetlerle renkli bir atmosfer sunuyor. Program için bize sorun, takip ediyoruz." }, en: { t: "Seferihisar Mandarin Festival", s: "November · annual", v: "November", n: "A colourful festival dedicated to Seferihisar's beloved mandarin, held each year in November. Concerts, competitions, producer stalls and local flavours. Ask us for the programme — we keep track of it." } },
       ],
     },
 
@@ -300,33 +312,28 @@
       tr: { title: "Plajlar & Koylar", sub: "Sakin koylardan rüzgârlı kumsallara" },
       en: { title: "Beaches & Coves", sub: "From calm coves to breezy shores" },
       items: [
-        { slotId: "sec-beach-0", tr: { t: "Büyük Akkum", s: "Sörf & rüzgâr · Mavi Bayrak", d: "Sığacık'ın en bilinen plajı. Rüzgârlı günlerde sörfçülerin, sakin günlerde yüzücülerin gözdesi; geniş kumu ve berrak sığ suyla her ikisi için de biçilmiş kaftan.", meta: "2 km · 5 dk" }, en: { t: "Büyük Akkum", s: "Surf & wind · Blue Flag", d: "The best-known beach near Sığacık. Windsurfers love it on breezy days; swimmers love it when it's calm — wide sand and clear shallow water suit both perfectly.", meta: "2 km · 5 min" } },
-        { slotId: "sec-beach-1", tr: { t: "Ekmeksiz Plajı", s: "Gün batımı · halk plajı", d: "Uzun kumsalda yürüyüş, güneş ve akşamın renkleriyle boyanan ufuk. Sığacık çevresinde gün batımı izlemek için en güzel yerlerden biri.", meta: "3 km · 7 dk" }, en: { t: "Ekmeksiz Beach", s: "Sunset · public beach", d: "A long beach for strolling, sun and sunsets that turn the horizon every shade of amber. One of the best spots near Sığacık to watch the evening come in.", meta: "3 km · 7 min" } },
-        { slotId: "sec-beach-2", tr: { t: "Akarca", s: "Berrak su · aile dostu", d: "Rüzgârdan korunaklı, sığ ve berrak bir koy. Çocuklar için güvenli, büyükler için dingin; sabahın erken saatlerinde neredeyse kendi başınıza.", meta: "6 km · 12 dk" }, en: { t: "Akarca", s: "Clear water · family", d: "A sheltered cove with shallow, clear water. Safe for children, peaceful for adults — and early in the morning, almost entirely yours.", meta: "6 km · 12 min" } },
-        { slotId: "sec-beach-3", tr: { t: "Güneşköy", s: "Sakin kıyı · plaj kulüpleri", d: "Kalabalığın uzağında, şezlongunuzda kitabınızla ya da plaj kulübünde güzel bir yemekle tam bir yavaş gün.", meta: "12 km · 18 dk" }, en: { t: "Güneşköy", s: "Calm coast · beach clubs", d: "Far enough from the crowd for a truly slow day — a book on your sunlounger or a proper meal at one of the beach clubs.", meta: "12 km · 18 min" } },
-        { slotId: "sec-beach-4", tr: { t: "Ürkmez Plajı", s: "Uzun kumsal · Mavi Bayrak", d: "Geniş kumlu sahil, sığ su ve Mavi Bayrak. Kitabı bir kenara bırakıp suya dalmak isteyenler için tam burası.", meta: "16 km · 22 dk" }, en: { t: "Ürkmez Plajı", s: "Long sand · Blue Flag", d: "Wide sand, shallow water and a Blue Flag. If you're going to put down the book and actually get in the sea, this is the place.", meta: "16 km · 22 min" } },
+        { slotId: "sec-beach-0", icon: "wave", tr: { t: "Büyük Akkum", s: "Sörf & rüzgâr · Mavi Bayrak", v: "2 km · 5 dk", n: "Sığacık'ın en bilinen plajı; kum, sığ ve berrak su. Otoparka girmek hem pahalı hem konforsuz — kale kapısından kalkan dolmuşla 5 dakikada çok daha rahat ulaşırsınız. Hem ücretli tesisler hem serbest alanlar mevcut." }, en: { t: "Büyük Akkum", s: "Surf & wind · Blue Flag", v: "2 km · 5 min", n: "Sığacık's best-known beach: sand, shallow and clear water. The car park is expensive and inconvenient — the dolmuş from the castle gate gets you there in 5 minutes, far more comfortably. Both paid facilities and free areas available." } },
+        { slotId: "sec-beach-1", icon: "wave", tr: { t: "Ekmeksiz Plajı", s: "Tabiat parkı · bakir", v: "3 km · 7 dk", n: "Aracı yol kenarına bırakıp yaklaşık 700 metrelik yürüyüş yolunu takip edin; yolun sonunda tesis olmayan, bakir ve doğal bir koya çıkarsınız. Tabiat parkı statüsünde korunan bu alan el değmemiş. Gün batımı burada çok güzel." }, en: { t: "Ekmeksiz Beach", s: "Nature park · pristine", v: "3 km · 7 min", n: "Park by the roadside and follow the 700-metre footpath; it leads to a pristine, facility-free cove at the end. Protected as a nature park and completely unspoilt. The sunsets here are extraordinary." } },
+        { slotId: "sec-beach-2", icon: "wave", tr: { t: "Akarca", s: "Geniş plaj · aile dostu", v: "6 km · 12 dk", n: "Girişi taşlık, ardından kum başlıyor; deniz önce sığ, kısa sürede derinleşiyor. Geniş bir plajı ve açık, rüzgarlı bir koyuyla özgür bir yüzme deneyimi sunan Akarca, aileler ve iyi yüzücüler için biçilmiş kaftan." }, en: { t: "Akarca", s: "Wide beach · family", v: "6 km · 12 min", n: "Rocky entry, then sand; the sea starts shallow and gradually deepens. With a wide beach and an open, breezy bay, Akarca is a great match for families and confident swimmers alike." } },
+        { slotId: "sec-beach-3", icon: "wave", tr: { t: "Güneşköy", s: "Sakin kıyı · plaj kulüpleri", v: "12 km · 18 dk", n: "Kalabalığın uzağında, şezlongunuzda kitabınızla ya da plaj kulübünde güzel bir yemekle tam bir yavaş gün." }, en: { t: "Güneşköy", s: "Calm coast · beach clubs", v: "12 km · 18 min", n: "Far enough from the crowd for a genuinely slow day — a book on your sunlounger or a proper meal at one of the beach clubs." } },
+        { slotId: "sec-beach-4", icon: "wave", tr: { t: "Ürkmez Plajı", s: "Uzun kumsal · Mavi Bayrak", v: "16 km · 22 dk", n: "Geniş kumlu sahil, sığ su ve Mavi Bayrak. Kitabı bir kenara bırakıp suya dalmak isteyenler için tam burası." }, en: { t: "Ürkmez Plajı", s: "Long sand · Blue Flag", v: "16 km · 22 min", n: "Wide sand, shallow water and a Blue Flag. If you're going to put down the book and actually get in the sea, this is the place." } },
       ],
-      note: {
-        tr: { t: "Plaja Gitmeden Önce", d: "Boii plaj havlunuzu almayı unutmayın; gün sonunda geri bırakmanız yeterli. Hangi plaja nasıl gidileceğini, park sorununun olup olmadığını ve sakin saatlerini sormaktan çekinmeyin — en kısa ve keyifli yolu gösteririz." },
-        en: { t: "Before You Go", d: "Don't forget your complimentary Boii beach towel — just drop it back in the evening. Ask us which beach suits you today, how to get there and when it's quietest. We know all the shortcuts." },
-      },
     },
 
     travel: {
       tr: { title: "Ulaşım & Mesafe", sub: "Sığacık'tan her yöne, düşündüğünüzden yakın" },
       en: { title: "Getting Around", sub: "Closer than you think from Sığacık" },
       items: [
-        { tr: { t: "Sığacık Marina", s: "Yürüyerek" }, en: { t: "Sığacık Marina", s: "On foot" }, km: "300 m", time: "3 dk", timeEn: "3 min" },
-        { tr: { t: "Seferihisar Merkez", s: "Araçla" }, en: { t: "Seferihisar Town", s: "By car" }, km: "5 km", time: "12 dk", timeEn: "12 min" },
-        { tr: { t: "Çeşme", s: "Araçla" }, en: { t: "Çeşme", s: "By car" }, km: "45 km", time: "50 dk", timeEn: "50 min" },
-        { tr: { t: "Adnan Menderes Havalimanı", s: "İzmir (ADB)" }, en: { t: "Adnan Menderes Airport", s: "İzmir (ADB)" }, km: "50 km", time: "55 dk", timeEn: "55 min" },
-        { tr: { t: "İzmir Şehir Merkezi", s: "Konak" }, en: { t: "İzmir City Centre", s: "Konak" }, km: "52 km", time: "60 dk", timeEn: "60 min" },
-        { tr: { t: "Efes & Selçuk", s: "Antik kent" }, en: { t: "Ephesus & Selçuk", s: "Ancient city" }, km: "70 km", time: "75 dk", timeEn: "75 min" },
+        { tr: { t: "Sığacık Marina", s: "Yürüyerek", v: "300 m", n: "Hemen yanı başınızda. Sabah balıkçı teknelerinin dönüşünü izleyin, öğlen koy turuna çıkın, akşam güneş batarken kıyıda yürüyüş yapın. Tekne turu için tekne turu önerilerinde bulunabiliriz." }, en: { t: "Sığacık Marina", s: "On foot", v: "300 m", n: "Right on your doorstep. Watch the fishing boats come in each morning, join a cove tour at noon, stroll along the waterfront at sunset. Ask us for boat trip recommendations." }, km: "300 m", time: "3 dk", timeEn: "3 min" },
+        { tr: { t: "Seferihisar Merkez", s: "Araçla", v: "5 km", n: "İlçe merkezi; çarşı, pazar alanı ve tarihi ticaret mahallesiyle Sığacık'tan farklı bir tempo. Banka, market ve eczane için en yakın nokta." }, en: { t: "Seferihisar Town", s: "By car", v: "5 km", n: "The district centre, with its bazaar, market square and a livelier pace than Sığacık. Your nearest point for banking, supermarket and pharmacy." }, km: "5 km", time: "12 dk", timeEn: "12 min" },
+        { tr: { t: "Urla", s: "Araçla", v: "30 km", n: "İzmir'in gözde bağ ve gastronomi rotası. Bademler Sanat Köyü'nü, Michelin yıldızlı restoranları, butik şaraphane ve tasarım atölyelerini gezin. Tam bir hafta sonu kaçamağı." }, en: { t: "Urla", s: "By car", v: "30 km", n: "İzmir's favourite wine and gastronomy trail. Visit Bademler Art Village, Michelin-starred restaurants, boutique wineries and design studios. A perfect weekend escape." }, km: "30 km", time: "35 dk", timeEn: "35 min" },
+        { tr: { t: "Çeşme", s: "Araçla", v: "45 km", n: "Rüzgar sörfü, canlı marina ve kalabalık bir sahil kenti. Alaçatı'yı da rotanıza ekleyin — taş sokaklar ve butikler için ayrıca değer." }, en: { t: "Çeşme", s: "By car", v: "45 km", n: "Wind surfing, a lively marina and a busy seaside town. Add Alaçatı to your route — the cobbled lanes and boutiques are worth it." }, km: "45 km", time: "50 dk", timeEn: "50 min" },
+        { tr: { t: "Adnan Menderes Havalimanı", s: "İzmir (ADB)", v: "50 km", n: "Uçuş öncesi transfer için bize sorun; güvenilir sürücüler önerebilir ya da rezervasyon yapabiliriz." }, en: { t: "Adnan Menderes Airport", s: "İzmir (ADB)", v: "50 km", n: "Ask us about transfer options before your flight — we can recommend reliable drivers or make a booking." }, km: "50 km", time: "55 dk", timeEn: "55 min" },
+        { tr: { t: "İzmir Şehir Merkezi", s: "Konak", v: "52 km", n: "Konak, Kordon, Alsancak. İzmir'i layıkıyla gezmek için en az yarım gün ayırın. Sabah erkenden gidip akşam dönmek rahatça mümkün." }, en: { t: "İzmir City Centre", s: "Konak", v: "52 km", n: "Konak, Kordon, Alsancak. Allow at least half a day to do İzmir justice. An early start gets you back by evening." }, km: "52 km", time: "60 dk", timeEn: "60 min" },
+        { tr: { t: "Efes & Selçuk", s: "Antik kent", v: "70 km", n: "Dünyanın en iyi korunmuş antik kentlerinden biri. Gece müzeciliğinin görkemini deneyimlemenizi mutlaka öneririz." }, en: { t: "Ephesus & Selçuk", s: "Ancient city", v: "70 km", n: "One of the best-preserved ancient cities in the world. We strongly recommend experiencing the grandeur of its night museum." }, km: "70 km", time: "75 dk", timeEn: "75 min" },
+        { tr: { t: "Kuşadası", s: "Araçla", v: "80 km", n: "Kruvaziyer gemileri ve yoğun turizmiyle bilinen liman kenti. Efes ziyaretiyle birleştirmek mantıklı — ikisi aynı güne sığar." }, en: { t: "Kuşadası", s: "By car", v: "80 km", n: "A harbour town known for cruise ships and summer tourism. Pair it with an Ephesus visit — both fit comfortably in one day." }, km: "80 km", time: "90 dk", timeEn: "90 min" },
+        { tr: { t: "Samos (Sisam)", s: "Teos Marina'dan feribot", v: "Teos Marina · feribot", n: "Vizeniz varsa mutlaka öneririz. Teos Marina'dan yaklaşık 1 saatlik feribotle ulaşılıyor. Yunan adası sakinliği, taze deniz ürünleri ve Ege'nin iki yakasını aynı günde görmek mümkün." }, en: { t: "Samos", s: "Ferry from Teos Marina", v: "Teos Marina · ferry", n: "A must if you have a visa. Around 1 hour by ferry from Teos Marina. Greek island calm, fresh seafood and both sides of the Aegean in one day." }, km: "feribot", time: "1 sa", timeEn: "1 hr" },
       ],
-      note: {
-        tr: { t: "Nasıl Gidilir?", d: "Sığacık–Seferihisar dolmuşları her saat başı çalışır. Taksi için bize sorun; güvenilir sürücüler önerebiliriz. Araç kiralamak isteyenler için de seçeneklerimiz var. Çeşme, Efes veya havalimanı için önceden transfer ayarlayabiliriz." },
-        en: { t: "How to Get There", d: "Dolmuş minibuses run hourly between Sığacık and Seferihisar. Ask us for taxi recommendations — we know reliable drivers. We can also suggest car rental, or arrange a transfer to Çeşme, Ephesus or the airport." },
-      },
     },
 
     ui: {
@@ -678,80 +685,79 @@
     );
   }
 
-  function PlaceList({ lang, onHome, D, className }) {
+  function PlaceSection({ lang, onHome, D, className }) {
+    const { focusId } = useFocus();
     useAutoFocus(className);
+    const activeIdx = Math.max(0, D.items.findIndex((_, i) => focusId === `${className}-${i}`));
+    const active = D.items[activeIdx];
     return (
-      <SectionShell lang={lang} title={D[lang].title} sub={D[lang].sub} onHome={onHome} className={className}>
-        {D.intro && (
-          <div className="place-note place-intro">
-            <span className="place-note-ic"><Icon name="landmark" size={1.5} /></span>
-            <div className="place-note-text">
-              <div className="place-note-t">{D.intro[lang].t}</div>
-              <div className="place-note-d">{D.intro[lang].d}</div>
-            </div>
-          </div>
-        )}
-        <main className="place-grid">
-          {D.items.map((it, i) => (
-            <Focusable key={i} id={`pl-${i}`} className="place-card" autoFocus={i === 0} onSelect={() => {}}>
-              <div className="place-img">
-                <SlotImage slotId={it.slotId} label={it[lang].t} />
-              </div>
-              <div className="place-info">
-                <div className="place-row">
-                  <div className="place-t">{it[lang].t}</div>
-                  {it[lang].meta && <div className="place-meta"><Icon name="pin" size={0.9} />{it[lang].meta}</div>}
+      <SectionShell lang={lang} title={D[lang].title} sub={D[lang].sub} onHome={onHome} className={`sec-${className}`}>
+        <main className="md-layout">
+          <div className="info-list">
+            {D.items.map((it, i) => (
+              <Focusable key={i} id={`${className}-${i}`} className="info-item" autoFocus={i === 0} onSelect={() => {}}>
+                <span className="info-ic"><Icon name={it.icon || 'pin'} size={1.2} /></span>
+                <div className="info-text">
+                  <div className="info-t">{it[lang].t}</div>
+                  {it[lang].s && <div className="md-s">{it[lang].s}</div>}
                 </div>
-                <div className="place-s">{it[lang].s}</div>
-                <div className="place-d">{it[lang].d}</div>
-              </div>
-            </Focusable>
-          ))}
-        </main>
-        {D.note && (
-          <div className="place-note">
-            <span className="place-note-ic"><Icon name="dining" size={1.5} /></span>
-            <div className="place-note-text">
-              <div className="place-note-t">{D.note[lang].t}</div>
-              {Array.isArray(D.note[lang].d)
-                ? D.note[lang].d.map((line, i) => <div key={i} className="place-note-d">{line}</div>)
-                : <div className="place-note-d">{D.note[lang].d}</div>}
-            </div>
+              </Focusable>
+            ))}
           </div>
-        )}
+          <div className={`md-detail${active.slotId ? ' has-photo' : ' no-photo'}`}>
+            {active.slotId ? (
+              <>
+                <div className="md-photo"><SlotImage slotId={active.slotId} label={active[lang].t} /></div>
+                <div className="md-body">
+                  <div className="md-detail-label">{active[lang].s}</div>
+                  <div className="md-detail-h">{active[lang].t}</div>
+                  {active[lang].v && <div className="md-detail-meta"><Icon name="pin" size={0.9} />{active[lang].v}</div>}
+                  <div className="info-detail-note">{active[lang].n}</div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="info-detail-icon"><Icon name={active.icon || 'pin'} size={2.2} /></div>
+                <div className="info-detail-title">{active[lang].s || active[lang].t}</div>
+                <div className="info-detail-value">{active[lang].v}</div>
+                <div className="info-detail-note">{active[lang].n}</div>
+              </>
+            )}
+          </div>
+        </main>
       </SectionShell>
     );
   }
 
   function Travel({ lang, onHome }) {
     const D = window.BOII.travel;
+    const { focusId } = useFocus();
     useAutoFocus("travel");
+    const activeIdx = Math.max(0, D.items.findIndex((_, i) => focusId === `tr-${i}`));
+    const active = D.items[activeIdx];
     return (
       <SectionShell lang={lang} title={D[lang].title} sub={D[lang].sub} onHome={onHome} className="sec-travel">
-        <main className="travel-layout">
-          <div className="travel-list">
+        <main className="md-layout">
+          <div className="info-list">
             {D.items.map((it, i) => (
-              <Focusable key={i} id={`tr-${i}`} className="travel-row" autoFocus={i === 0} onSelect={() => {}}>
+              <Focusable key={i} id={`tr-${i}`} className="info-item travel-item" autoFocus={i === 0} onSelect={() => {}}>
                 <span className="travel-dot" />
-                <div className="travel-name">
-                  <div className="travel-t">{it[lang].t}</div>
-                  <div className="travel-s">{it[lang].s}</div>
+                <div className="info-text">
+                  <div className="info-t">{it[lang].t}</div>
+                  <div className="md-s">{it[lang].s}</div>
                 </div>
                 <div className="travel-km">{it.km}</div>
-                <div className="travel-time"><Icon name="clock" size={1} />{lang === "tr" ? it.time : it.timeEn}</div>
               </Focusable>
             ))}
           </div>
-        </main>
-        {D.note && (
-          <div className="place-note">
-            <span className="place-note-ic"><Icon name="route" size={1.5} /></span>
-            <div className="place-note-text">
-              <div className="place-note-t">{D.note[lang].t}</div>
-              <div className="place-note-d">{D.note[lang].d}</div>
-            </div>
+          <div className="md-detail no-photo">
+            <div className="info-detail-icon"><Icon name="route" size={2.2} /></div>
+            <div className="info-detail-title">{active[lang].s}</div>
+            <div className="info-detail-value">{active[lang].v}</div>
+            <div className="travel-time-badge"><Icon name="clock" size={1.1} />{lang === "tr" ? active.time : active.timeEn}</div>
+            <div className="info-detail-note">{active[lang].n}</div>
           </div>
-        )}
+        </main>
       </SectionShell>
     );
   }
@@ -773,9 +779,9 @@
     let view;
     if (screen === "home") view = <Home lang={lang} setLang={setLang} go={go} />;
     else if (screen === "hotel") view = <HotelInfo lang={lang} onHome={onHome} />;
-    else if (screen === "guide") view = <PlaceList lang={lang} onHome={onHome} D={B.guide} className="sec-guide" />;
-    else if (screen === "market") view = <PlaceList lang={lang} onHome={onHome} D={B.market} className="sec-market" />;
-    else if (screen === "beaches") view = <PlaceList lang={lang} onHome={onHome} D={B.beaches} className="sec-beach" />;
+    else if (screen === "guide") view = <PlaceSection lang={lang} onHome={onHome} D={B.guide} className="guide" />;
+    else if (screen === "market") view = <PlaceSection lang={lang} onHome={onHome} D={B.market} className="market" />;
+    else if (screen === "beaches") view = <PlaceSection lang={lang} onHome={onHome} D={B.beaches} className="beach" />;
     else if (screen === "travel") view = <Travel lang={lang} onHome={onHome} />;
 
     return (
