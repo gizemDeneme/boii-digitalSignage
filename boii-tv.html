@@ -605,17 +605,21 @@
     );
   }
 
-  function WelcomeBlock({ lang, big }) {
+  function WelcomeBlock({ lang, big, guestName }) {
+    const firstName = guestName ? guestName.split(" ")[0] : null;
     return (
       <div className={`welcome ${big ? "welcome-big" : ""}`}>
         <h1 className="welcome-name">
-          {lang === "tr" ? "Sığacık'taki yeni evinize hoş geldiniz." : "Welcome to your new home in Sığacık."}
+          {firstName
+            ? (lang === "tr" ? `Hoş geldiniz, ${firstName}.` : `Welcome, ${firstName}.`)
+            : (lang === "tr" ? "Sığacık'taki yeni evinize hoş geldiniz." : "Welcome to your new home in Sığacık.")
+          }
         </h1>
       </div>
     );
   }
 
-  function Home({ lang, setLang, go }) {
+  function Home({ lang, setLang, go, guestName }) {
     const B = window.BOII;
     useAutoFocus("home");
     return (
@@ -623,7 +627,7 @@
         <TopBar lang={lang} setLang={setLang} />
         <div className="home-bg" aria-hidden="true" />
         <main className="home-main grid-main">
-          <WelcomeBlock lang={lang} />
+          <WelcomeBlock lang={lang} guestName={guestName} />
           <div className="tile-grid">
             {B.tiles.map((t, i) => (
               <Tile key={t.id} tile={t} lang={lang} go={go} autoFocus={i === 0} />
@@ -771,6 +775,28 @@
   function App() {
     const [screen, setScreen] = useState3("home");
     const [lang, setLang] = useState3("tr");
+    const [guestName, setGuestName] = useState3(null);
+
+    useEffect3(() => {
+      const fetchGuest = () => {
+        const cfg = window.__BOII_CONFIG;
+        if (!cfg || !cfg.room) return;
+        fetch(
+          "https://api.maxirez.com/api/v1/pms/boii-rest-breakfast/rooms/" + cfg.room + "/active-guest",
+          { headers: { "Authorization": "Bearer mxr_test_df712232351ff7d4b34890d69484f48e" } }
+        )
+          .then(r => r.ok ? r.json() : null)
+          .then(d => {
+            if (d && d.success && d.data && d.data.occupied) setGuestName(d.data.leadGuestName);
+            else setGuestName(null);
+          })
+          .catch(() => {});
+      };
+      fetchGuest();
+      window.__onBoiiConfig = fetchGuest;
+      const iv = setInterval(fetchGuest, 10 * 60 * 1000);
+      return () => { clearInterval(iv); window.__onBoiiConfig = null; };
+    }, []);
 
     const go = (id) => setScreen(id);
     const onHome = () => setScreen("home");
@@ -778,7 +804,7 @@
 
     const B = window.BOII;
     let view;
-    if (screen === "home") view = <Home lang={lang} setLang={setLang} go={go} />;
+    if (screen === "home") view = <Home lang={lang} setLang={setLang} go={go} guestName={guestName} />;
     else if (screen === "hotel") view = <HotelInfo lang={lang} onHome={onHome} />;
     else if (screen === "guide") view = <PlaceSection lang={lang} onHome={onHome} D={B.guide} className="guide" />;
     else if (screen === "market") view = <PlaceSection lang={lang} onHome={onHome} D={B.market} className="market" />;

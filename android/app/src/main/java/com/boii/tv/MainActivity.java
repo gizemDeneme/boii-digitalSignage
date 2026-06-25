@@ -8,7 +8,10 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class MainActivity extends Activity {
 
@@ -51,7 +54,26 @@ public class MainActivity extends Activity {
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
 
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                File configFile = new File(getExternalFilesDir(null), "boii-config.json");
+                if (!configFile.exists()) return;
+                try {
+                    StringBuilder sb = new StringBuilder();
+                    BufferedReader br = new BufferedReader(new FileReader(configFile));
+                    String line;
+                    while ((line = br.readLine()) != null) sb.append(line);
+                    br.close();
+                    String json = sb.toString().trim();
+                    view.evaluateJavascript(
+                        "window.__BOII_CONFIG=" + json + ";" +
+                        "if(typeof window.__onBoiiConfig==='function')window.__onBoiiConfig();",
+                        null
+                    );
+                } catch (IOException e) { /* config okunamadı, misafir adı gösterilmez */ }
+            }
+        });
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
