@@ -95,6 +95,7 @@
   .grid-main { display: flex; flex-direction: column; }
   .layout-grid .welcome { padding: 2px 0 16px; }
   .layout-grid .welcome-name { font-size: 54px; }
+  .layout-grid .welcome-name.has-guest { font-size: 44px; }
   .tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 24px; flex: 1; padding-bottom: 48px; }
 
   .hero-main { display: grid; grid-template-columns: 1fr 0.86fr; gap: 30px; padding-bottom: 56px; align-items: stretch; }
@@ -160,7 +161,7 @@
   .wifi-label { font-family: var(--font-display); font-size: 30px; font-weight: 600; margin: 14px 0 22px; }
   .wifi-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.25); font-size: 19px; }
   .wifi-row span { opacity: .82; }
-  .wifi-row b { font-family: var(--font-display); font-size: 26px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 58%; }
+  .wifi-row b { font-family: var(--font-display); font-size: 21px; font-weight: 600; }
   .wifi-note { margin-top: auto; padding-top: 22px; font-size: 18px; line-height: 1.4; color: rgba(255,255,255,.85); border-top: 1px solid rgba(255,255,255,.22); display: flex; align-items: center; gap: 10px; }
   .wifi-note::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #fff7ee; flex-shrink: 0; box-shadow: 0 0 0 4px rgba(255,255,255,.18); }
 
@@ -628,9 +629,11 @@
   function WelcomeBlock({ lang, big, guestName }) {
     return (
       <div className={`welcome ${big ? "welcome-big" : ""}`}>
-        <h1 className="welcome-name">
+        <h1 className={`welcome-name${guestName ? " has-guest" : ""}`}>
           {guestName
-            ? (lang === "tr" ? `Hoş geldiniz, ${guestName}.` : `Welcome, ${guestName}.`)
+            ? (lang === "tr"
+                ? `Sığacık'taki yeni evinize hoş geldiniz, ${guestName}. ☺️`
+                : `Welcome to your new home in Sığacık, ${guestName}. ☺️`)
             : (lang === "tr" ? "Sığacık'taki yeni evinize hoş geldiniz." : "Welcome to your new home in Sığacık.")
           }
         </h1>
