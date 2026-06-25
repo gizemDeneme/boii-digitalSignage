@@ -148,11 +148,13 @@
   .info-ic { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 13px; background: var(--surface2); color: var(--accent); flex-shrink: 0; border: 1px solid var(--line-soft); }
   .info-item.is-focused .info-ic { background: var(--accent); color: #fff7ee; }
   .info-t { font-size: 20px; font-weight: 600; color: var(--ink); }
-  .info-detail { display: flex; flex-direction: column; justify-content: center; padding: 44px 50px; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: var(--radius); }
-  .info-detail-icon { color: var(--accent); margin-bottom: 22px; }
-  .info-detail-title { font-size: 17px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; }
-  .info-detail-value { font-family: var(--font-display); font-size: 50px; font-weight: 600; color: var(--ink); line-height: 1.05; margin: 12px 0 26px; }
-  .info-detail-note { font-size: 23px; line-height: 1.65; color: var(--ink-soft); text-wrap: pretty; }
+  .info-detail { display: flex; flex-direction: column; justify-content: center; padding: 44px 50px; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: var(--radius); position: relative; overflow: hidden; }
+  .info-detail-illus { position: absolute; right: -18px; bottom: -18px; width: 260px; height: 260px; color: var(--accent); opacity: .07; pointer-events: none; }
+  .info-detail-category { font-size: 13px; color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: .18em; margin-bottom: 16px; }
+  .info-detail-icon { color: var(--accent); margin-bottom: 14px; }
+  .info-detail-title { font-family: var(--font-display); font-size: 38px; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 14px; }
+  .info-detail-badge { display: inline-flex; align-items: center; background: var(--surface2); border: 1px solid var(--line-soft); border-radius: 100px; padding: 7px 20px; font-size: 19px; font-weight: 600; color: var(--ink-soft); margin-bottom: 20px; align-self: flex-start; }
+  .info-detail-note { font-size: 22px; line-height: 1.65; color: var(--ink-soft); text-wrap: pretty; }
   .wifi-card { background: linear-gradient(160deg, var(--accent), #8c4a2e); color: #fff7ee; border-radius: var(--radius); padding: 38px 40px; display: flex; flex-direction: column; }
   .wifi-card .icon { color: #fff7ee; }
   .wifi-label { font-family: var(--font-display); font-size: 30px; font-weight: 600; margin: 14px 0 22px; }
@@ -624,12 +626,11 @@
   }
 
   function WelcomeBlock({ lang, big, guestName }) {
-    const firstName = guestName ? guestName.split(" ")[0] : null;
     return (
       <div className={`welcome ${big ? "welcome-big" : ""}`}>
         <h1 className="welcome-name">
-          {firstName
-            ? (lang === "tr" ? `Hoş geldiniz, ${firstName}.` : `Welcome, ${firstName}.`)
+          {guestName
+            ? (lang === "tr" ? `Hoş geldiniz, ${guestName}.` : `Welcome, ${guestName}.`)
             : (lang === "tr" ? "Sığacık'taki yeni evinize hoş geldiniz." : "Welcome to your new home in Sığacık.")
           }
         </h1>
@@ -670,6 +671,17 @@
     );
   }
 
+  const INFO_ILLUS = {
+    coffee: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M55 85h130l-18 100H73L55 85z'/><path d='M185 110c20 0 28 15 28 30s-8 30-28 30'/><ellipse cx='120' cy='188' rx='58' ry='10'/><path d='M82 70q5-20-3-38'/><path d='M108 65q5-20-3-38'/><path d='M134 70q5-20-3-38'/></svg>`,
+    door: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='55' y='35' width='110' height='165' rx='6'/><circle cx='145' cy='118' r='8'/><path d='M30 200h180'/><circle cx='190' cy='72' r='22'/><path d='M190 40v-10M190 104v10M158 72h-10M222 72h10M167 49l-7-7M213 49l7-7M167 95l-7 7M213 95l7 7'/></svg>`,
+    moon: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M95 45q-48 28-48 75q0 50 48 75q-55-5-72-53q-15-44 8-83q22-37 64-17z'/><path d='M155 38l3 12 12 3-12 3-3 12-3-12-12-3 12-3z'/><path d='M185 85l2 8 8 2-8 2-2 8-2-8-8-2 8-2z'/><circle cx='148' cy='95' r='3' fill='currentColor' stroke='none'/><circle cx='172' cy='55' r='2' fill='currentColor' stroke='none'/><path d='M10 205q35-18 70 0t70 0t70 0'/><path d='M10 220q35-18 70 0t70 0t70 0'/></svg>`,
+    towel: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='120' cy='72' r='35'/><path d='M120 27v-10M120 117v10M75 72H65M165 72h10M88 40l-7-7M152 40l7-7M88 104l-7 7M152 104l7 7'/><rect x='45' y='128' width='150' height='82' rx='10'/><line x1='45' y1='150' x2='195' y2='150'/><line x1='45' y1='172' x2='195' y2='172'/><line x1='45' y1='194' x2='195' y2='194'/></svg>`,
+    smoking: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><line x1='20' y1='175' x2='220' y2='175'/><line x1='52' y1='128' x2='52' y2='175'/><line x1='88' y1='128' x2='88' y2='175'/><line x1='124' y1='128' x2='124' y2='175'/><line x1='160' y1='128' x2='160' y2='175'/><line x1='196' y1='128' x2='196' y2='175'/><path d='M95 130q25-35 50 0'/><path d='M120 110q8-28-5-52'/><path d='M115 58q28 5 20 32'/><path d='M125 82q22 10 15 30'/><rect x='95' y='155' width='50' height='22' rx='5'/></svg>`,
+    droplet: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='120' cy='82' r='38'/><path d='M120 34v-12M120 130v12M72 82H60M168 82h12M88 50l-8-8M152 50l8-8M88 114l-8 8M152 114l8 8'/><path d='M65 165q0-20 14 0q14 20 0 30q-14 8-14-30z'/><path d='M112 175q0-20 14 0q14 20 0 30q-14 8-14-30z'/><path d='M159 165q0-20 14 0q14 20 0 30q-14 8-14-30z'/></svg>`,
+    leaf: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='55' y='52' width='95' height='140' rx='10'/><rect x='68' y='76' width='70' height='8' rx='3'/><rect x='68' y='96' width='50' height='8' rx='3'/><rect x='68' y='165' width='32' height='12' rx='6'/><path d='M155 135q22-48 58-72'/><path d='M155 135q55-18 58-72'/><path d='M155 135q18-8 25-25'/><path d='M155 135q12 8 16-8'/><path d='M155 135q4 16-6 26'/></svg>`,
+    phone: `<svg viewBox='0 0 240 240' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='80' y='25' width='80' height='155' rx='18'/><line x1='98' y1='50' x2='142' y2='50'/><circle cx='120' cy='162' r='9'/><rect x='142' y='75' width='75' height='48' rx='12'/><path d='M150 123l-8 18 22-18'/><rect x='23' y='105' width='65' height='42' rx='12'/><path d='M80 147l10 16-20-16'/></svg>`,
+  };
+
   function HotelInfo({ lang, onHome }) {
     const D = window.BOII.hotelInfo, B = window.BOII, U = B.ui[lang];
     const { focusId } = useFocus();
@@ -690,9 +702,13 @@
             ))}
           </div>
           <div className="info-detail">
+            {INFO_ILLUS[active.icon] && (
+              <div className="info-detail-illus" dangerouslySetInnerHTML={{__html: INFO_ILLUS[active.icon]}} />
+            )}
+            <div className="info-detail-category">{D[lang].title}</div>
             <div className="info-detail-icon"><Icon name={active.icon} size={2.2} /></div>
             <div className="info-detail-title">{active[lang].t}</div>
-            <div className="info-detail-value">{active[lang].v}</div>
+            {active[lang].v && <div className="info-detail-badge">{active[lang].v}</div>}
             <div className="info-detail-note">{active[lang].n}</div>
           </div>
           <aside className="wifi-card">
