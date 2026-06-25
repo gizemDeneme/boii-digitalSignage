@@ -149,7 +149,7 @@
   .info-item.is-focused .info-ic { background: var(--accent); color: #fff7ee; }
   .info-t { font-size: 20px; font-weight: 600; color: var(--ink); }
   .info-detail { display: flex; flex-direction: column; justify-content: center; padding: 44px 50px; background: var(--surface); border: 1.5px solid var(--line-soft); border-radius: var(--radius); position: relative; overflow: hidden; }
-  .info-detail-illus { position: absolute; right: -18px; bottom: -18px; width: 260px; height: 260px; color: var(--accent); opacity: .07; pointer-events: none; }
+  .info-detail-illus { position: absolute; right: -18px; bottom: -18px; width: 260px; height: 260px; color: #c4622d; opacity: .18; pointer-events: none; }
   .info-detail-category { font-size: 13px; color: var(--accent2); font-weight: 600; text-transform: uppercase; letter-spacing: .18em; margin-bottom: 16px; }
   .info-detail-icon { color: var(--accent); margin-bottom: 14px; }
   .info-detail-title { font-family: var(--font-display); font-size: 38px; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 14px; }
@@ -160,7 +160,7 @@
   .wifi-label { font-family: var(--font-display); font-size: 30px; font-weight: 600; margin: 14px 0 22px; }
   .wifi-row { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.25); font-size: 19px; }
   .wifi-row span { opacity: .82; }
-  .wifi-row b { font-family: var(--font-display); font-size: 26px; font-weight: 600; }
+  .wifi-row b { font-family: var(--font-display); font-size: 26px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 58%; }
   .wifi-note { margin-top: auto; padding-top: 22px; font-size: 18px; line-height: 1.4; color: rgba(255,255,255,.85); border-top: 1px solid rgba(255,255,255,.22); display: flex; align-items: center; gap: 10px; }
   .wifi-note::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #fff7ee; flex-shrink: 0; box-shadow: 0 0 0 4px rgba(255,255,255,.18); }
 
@@ -282,7 +282,7 @@
         { icon: "smoking", tr: { t: "Sigara", v: "Balkon veya bahçede", n: "Odaların temizlik standartlarını ve yangın güvenliğini korumak adına odalarımızda sigara içilmemektedir. Balkonlu odalarımızda balkonda, balkonsuz odalarımızda kat kapı önleri ile avlumuzda kül tablası bulunmaktadır." }, en: { t: "Smoking", v: "Balcony or garden", n: "Smoking is not permitted in rooms. To protect our cleanliness standards and fire safety, we ask that you keep it to outdoor spaces. Ashtrays are available on balconies, at floor entrances, and in the courtyard." } },
         { icon: "droplet", tr: { t: "Su Kullanımı", v: "Güneş enerjili", n: "Bölgemizdeki su alışkın olduğunuzdan biraz daha kireçlidir; çeşme suyunu içmemenizi öneririz. Suyumuz güneş enerjisiyle ısıtılır; beklediğinizden çok daha sıcak akabilir. Duşa girmeden önce soğuk suyla dengelemenizi tavsiye ederiz." }, en: { t: "Water", v: "Solar-heated", n: "The water in our area is a little harder than you may be used to — please don't drink from the tap. Our water is solar-heated; it can run much hotter than expected. We recommend balancing with cold water before stepping in." } },
         { icon: "leaf",    tr: { t: "Minibar", v: "Oda kartıyla aktif", n: "Doğal kaynakları koruma anlayışımız gereği, odalardaki elektrik sistemi yalnızca oda kartı takıldığında aktif olur. Bu nedenle minibarınızdaki sular yeterince soğumamış olabilir. Ortak alanlardaki buzdolabımızda her zaman soğuk su bulunmaktadır; dilediğiniz zaman alabilir ya da bizden isteyebilirsiniz. Soğutulması gereken başka ihtiyaçlarınız için de bize ulaşın." }, en: { t: "Minibar", v: "Active with key card", n: "In keeping with our care for natural resources, room electrics are only active when your key card is inserted — so the water in your minibar may not be fully chilled. Cold water is always available in the shared fridge in our common areas; help yourself or just ask. For anything else that needs to stay cold, we're here." } },
-        { icon: "phone",   tr: { t: "İletişim", v: "0542 114 76 44", n: "0542 114 76 44'ün ucunda her zaman biz varız. Günün her saati ihtiyaçlarınız veya sorularınız için arayabilirsiniz. Gece acil durumlar için WhatsApp'tan oda numaranızı içeren kısa bir mesaj gönderirseniz; sizi kaydeder, uykuda dahi olsak bize ulaşmanızı sağlarız." }, en: { t: "Contact", v: "0542 114 76 44", n: "We're always at the other end of 0542 114 76 44. Call any time of day for anything you need. For late-night emergencies, send a quick WhatsApp message with your room number — we'll save your contact and make sure you can reach us even in our sleep." } },
+        { icon: "phone",   tr: { t: "İletişim", v: "0542 114 76 44", n: "0542 114 76 44'ün ucunda her zaman biz varız. Günün her saati ihtiyaçlarınız veya sorularınız için arayabilirsiniz. Gece acil durumlar için WhatsApp'tan oda numaranızı içeren kısa bir mesaj gönderirseniz; sizi kaydeder, uykuda dahi olsak bize ulaşmanızı sağlarız." }, en: { t: "Contact", v: "+90 542 114 76 44", n: "We're always at the other end of +90 542 114 76 44. Call any time of day for anything you need. For late-night emergencies, send a quick WhatsApp message with your room number — we'll save your contact and make sure you can reach us even in our sleep." } },
       ],
 
     },
