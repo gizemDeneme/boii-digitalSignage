@@ -553,18 +553,18 @@
     const [weather, setWeather] = React.useState(null);
     React.useEffect(() => {
       const fetch_ = () => {
-        fetch("https://api.open-meteo.com/v1/forecast?latitude=38.19&longitude=26.79&current=temperature_2m,weather_code")
+        fetch("https://wttr.in/38.19,26.79?format=j1")
           .then(r => r.json())
           .then(d => {
-            const t = Math.round(d.current.temperature_2m);
-            const c = d.current.weather_code;
-            const icon = c === 0 || c === 1 ? "sun" : (c >= 51 ? "droplet" : "cloud");
+            const t = parseInt(d.current_condition[0].temp_C);
+            const code = parseInt(d.current_condition[0].weatherCode);
+            const icon = code === 113 ? "sun" : (code >= 296 ? "droplet" : "cloud");
             setWeather({ t, icon });
           })
           .catch(() => {});
       };
       fetch_();
-      const iv = setInterval(fetch_, 30 * 60 * 1000);
+      const iv = setInterval(fetch_, 15 * 60 * 1000);
       return () => clearInterval(iv);
     }, []);
     return (
