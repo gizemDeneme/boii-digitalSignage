@@ -516,6 +516,7 @@
       arrow: <g {...p}><path d="M5 12h14M13 6l6 6-6 6" /></g>,
       globe: <g {...p}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></g>,
       wifi: <g {...p}><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0" /><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none" /></g>,
+      cloud: <g {...p}><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></g>,
       sun: <g {...p}><circle cx="12" cy="12" r="4" /><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M18.5 5.5l-1.4 1.4M6.9 17.1l-1.4 1.4" /></g>,
       droplet: <g {...p}><path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0C19 10 12 2 12 2Z" /></g>,
     };
@@ -549,6 +550,23 @@
 
   function TopBar({ lang, setLang }) {
     const B = window.BOII;
+    const [weather, setWeather] = React.useState(null);
+    React.useEffect(() => {
+      const fetch_ = () => {
+        fetch("https://api.open-meteo.com/v1/forecast?latitude=38.19&longitude=26.79&current=temperature_2m,weather_code")
+          .then(r => r.json())
+          .then(d => {
+            const t = Math.round(d.current.temperature_2m);
+            const c = d.current.weather_code;
+            const icon = c === 0 || c === 1 ? "sun" : (c >= 51 ? "droplet" : "cloud");
+            setWeather({ t, icon });
+          })
+          .catch(() => {});
+      };
+      fetch_();
+      const iv = setInterval(fetch_, 30 * 60 * 1000);
+      return () => clearInterval(iv);
+    }, []);
     return (
       <header className="topbar">
         <div className="brand">
@@ -556,8 +574,8 @@
         </div>
         <div className="topbar-right">
           <div className="weather">
-            <Icon name="sun" size={1.3} />
-            <span className="weather-temp">24°</span>
+            <Icon name={weather ? weather.icon : "sun"} size={1.3} />
+            <span className="weather-temp">{weather ? weather.t + "°" : "—°"}</span>
             <span className="weather-meta">Sığacık</span>
           </div>
           <Clock lang={lang} />
