@@ -7,10 +7,12 @@
 
 IP="$1"
 ROOM="$2"
+LOCAL_APK="$3"
 
 if [ -z "$IP" ] || [ -z "$ROOM" ]; then
-  echo "Kullanım: $0 <IP> <ODA_NO>"
+  echo "Kullanım: $0 <IP> <ODA_NO> [APK_YOLU]"
   echo "Örnek:    $0 192.168.1.3 3"
+  echo "Örnek:    $0 192.168.1.3 3 ~/Desktop/boii-tv-debug.apk"
   exit 1
 fi
 
@@ -50,17 +52,23 @@ else
   echo "    Yüklü değil, devam ediliyor."
 fi
 
-# 3. APK indir ve yükle
+# 3. APK indir veya yerel kullan
 echo ""
-echo "📦  APK indiriliyor..."
-curl -sL "$APK_URL" -o /tmp/boii-tv-setup.apk
-if [ $? -ne 0 ] || [ ! -s /tmp/boii-tv-setup.apk ]; then
-  echo "❌  APK indirilemedi."
-  exit 1
+if [ -n "$LOCAL_APK" ] && [ -f "$LOCAL_APK" ]; then
+  echo "📦  Yerel APK kullanılıyor: $LOCAL_APK"
+  APK_PATH="$LOCAL_APK"
+else
+  echo "📦  APK indiriliyor..."
+  curl -sL "$APK_URL" -o /tmp/boii-tv-setup.apk
+  if [ $? -ne 0 ] || [ ! -s /tmp/boii-tv-setup.apk ]; then
+    echo "❌  APK indirilemedi."
+    exit 1
+  fi
+  APK_PATH="/tmp/boii-tv-setup.apk"
 fi
 
 echo "📲  APK yükleniyor..."
-adb -s "${IP}:5555" install /tmp/boii-tv-setup.apk
+adb -s "${IP}:5555" install "$APK_PATH"
 if [ $? -ne 0 ]; then
   echo "❌  Yükleme başarısız."
   exit 1
